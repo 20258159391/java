@@ -1,0 +1,178 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 团队管理</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+     <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+
+
+
+
+</head>
+
+<body class="gray-bg" >
+
+<div class="container-fluid" >
+
+    <!--导航栏-->
+    <nav class="navbar navbar-default navbar-fixed-top my-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="nav navbar-nav">
+                <a class="navbar-brand" href="#">校园二手交易平台</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#">主页</a></li>
+                <li><a href="#">SVN</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        商品分类 <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">书籍</a></li>
+                        <li><a href="#">日用品</a></li>
+                        <li><a href="#">工具类</a></li>
+                        <li class="divider">电子产品</li>
+                        <li><a href="#">分离的链接</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">另一个分离的链接</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">提交按钮</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li th:unless="${lguser}" ><a href="/login/register"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+                <li th:if="${lguser}"><span class="glyphicon "></span>yi登录</li>
+                <li th:unless="${lguser}"><a href="/login/lg"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+   <div class="container">
+       <div th:each="good :${goods}">
+           <div class="col-sm-3">
+               <div class="ibox">
+                   <div class="ibox-title">
+                        <span class=" pull-right">
+							<button class="btn btn-danger btn-circle btn-outline" type="button"><i class="fa fa-heart"></i>
+                            </button></span>
+                       <h5><span th:text="${good.goods_name}"></span></h5>
+                   </div>
+                   <div class="ibox-content">
+
+                       <h4><span th:text="${good.goods_info}"></span></h4>
+                       <a href="#"><img alt="member" class="img-thumbnail" src="../../img/a6.jpg">
+                           <div>
+                               <span>价格：<span th:text="${good.goods_price}"></span></span>
+                               <span class="pull-right"><button>购买</button></span>
+                           </div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <!-- 模态框触发按钮 -->
+       <button type="button" class="btn btn-primary navbar-nav" data-toggle="modal" data-target="#addProductModal">
+           上架新商品
+       </button>
+
+   </div>
+
+
+</div>
+
+
+
+<!-- 模态框 -->
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">添加商品</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="gb" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 表单 利用Ajax上传-->
+                <form id="addProductForm" th:action="@{/goods/addGoods" method="post"  >
+                    <div class="form-group">
+                        <label for="productName">商品名称</label>
+                        <input type="text" class="form-control" id="productName" name="goods_name" title="最大长度为10个字符" maxlength="10" placeholder="商品名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productName">商品简介</label>
+                        <input type="text" class="form-control" id="productInfo" name="goods_info" required>
+                    </div>
+                    <input name="owner_username" id="owner_username" type="text" th:value="${user.username}" hidden>
+                    <div class="form-group">
+                        <label for="productPrice">商品价格</label>
+                        <input type="number" class="form-control" id="productPrice" name="goods_price" min="0" step="0.01" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()"  id="addProductBtn">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function submitForm() {
+        var form = $('#addProductForm');
+
+        $.ajax({
+            type: form.attr('method'),
+            url: form.attr('action'),
+            data: form.serialize(),
+            success: function (message) {
+                alert(message);
+                //清空模态框中的表单输入的内容
+                $('#addProductForm').find("input, textarea, select").val("");
+                //提交表单后隐藏表单
+                $('#addProductModal').modal('hide');
+            },
+            error: function () {
+                alert('提交失败！');
+
+            }
+        });
+    }
+</script>
+<!-- 全局js -->
+<script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+<script src="/static/js/content.js"></script>
+
+
+</body>
+
+</html>

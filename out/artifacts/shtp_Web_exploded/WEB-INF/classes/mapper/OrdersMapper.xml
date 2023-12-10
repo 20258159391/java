@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.OrdersMapper">
+
+    <select id="getAllOrders" resultType="Orders">
+        SELECT orders.id AS id,username,goods_name,goods_price,list_date FROM `user`,goods,orders
+        WHERE `user`.id=orders.user_id  AND orders.goods_id=goods.id
+
+    </select>
+<!-- 实际删除  后面用逻辑删除代替       -->
+    <delete id="deleteOrderByid">
+        DELETE FROM orders WHERE id=#{id}
+    </delete>
+</mapper>

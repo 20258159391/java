@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.GoodsMapper">
+        
+        <select id="getAllgoods" resultType="Goods" >
+                SELECT * FROM goods where  sell=0 AND deltype=0
+        </select>
+
+        <select id="getAllNosuidOrders" resultType="Goods">
+                SELECT * FROM goods where goods.su_id=0 AND sell=0  AND deltype=0
+        </select>
+        <select id="getAllsuidOrders" resultType="Goods">
+                SELECT * FROM goods where goods.su_id=1  AND sell=0  AND deltype=0
+        </select>
+
+        <insert id="addGoods" parameterType="Goods">
+                INSERT INTO goods(goods_name,goods_info,goods_price,list_date,owner_name)
+                 VALUES(#{goods_name},#{goods_info},#{goods_price},#{list_date},#{owner_username});
+        </insert>
+        
+        <update id="updateGoods_suid" >
+                UPDATE goods SET su_id=1 WHERE id=#{id}  AND deltype=0
+        </update>
+<!--        管理员驳回处理-->
+        <update id="deleteGoods" >
+                UPDATE goods SET su_id=0 WHERE id=#{id}  AND deltype=0
+        </update>
+<!--        删除商品-->
+
+        <select id="count">
+                SELECT COUNT(*) FROM goods WHERE su_id=1
+        </select>
+
+
+</mapper>
