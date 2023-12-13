@@ -23,6 +23,10 @@ public class UserController {
     @Autowired
     private GoodsService goodsService;
     //管理员主页
+    @RequestMapping("/user_index")
+    public String user_index(){
+        return "user_index";
+    }
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -33,7 +37,7 @@ public class UserController {
     public String user_index(Model model){
         List<Goods> goodsList=goodsService.getAllsuidOrders();
         model.addAttribute("goods",goodsList);
-        return "user_index";
+        return "login_v2";
     }
 
 
@@ -48,18 +52,18 @@ public class UserController {
 
     @RequestMapping("/allUser")
     public String getAllUsers(Model model){
-        List<User> allusers = userService.getAllusers();
-        model.addAttribute("users",allusers);
-        for (User i:allusers
-             ) {
-            System.out.println(i.toString());
-        }
+        List<User> users = userService.getAllusers();
+        model.addAttribute("users",users);
+//        for (User i:allusers
+//             ) {
+//            System.out.println(i.toString());
+//        }
         return "allUser";
     }
 
     @RequestMapping("/deleteUser")
     public String deleteUserByid(String id,Model model){
-        System.out.println(id);
+//        System.out.println(id);
         int i = userService.deleteUserByid(id);
         List<User> allusers = userService.getAllusers();
         model.addAttribute("users",allusers);

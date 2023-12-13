@@ -10,10 +10,8 @@ import org.apache.commons.io.CopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -88,17 +86,33 @@ public class GoodsController {
         String datetime = tempDate.format(new java.util.Date());
         goods.setList_date(datetime);
         int i = goodsService.addGoods(goods);
-
         if (i>0)
             return "添加成功";
         else
             return "添加失败";
     }
+    @RequestMapping("/upload")
+    public String goo(){
 
+        return "goods_upload";
+    }
+    @RequestMapping(value = "/addgood",method = RequestMethod.POST)
+    @ResponseBody
+    public String addGood(@RequestParam String goods_name,@RequestParam String goods_info,
+                          @RequestParam(required = false) MultipartFile image,
+                          @RequestParam String goods_price
+                          ){
+        System.out.println(image);
+        String imageSuffix = Imageutil.getImageSuffix(image);
+        String newFileName = Imageutil.getNewFileName(imageSuffix);
+        String newImagePath = Imageutil.getNewImagePath(newFileName);
+        File file = new File(newImagePath);
+        boolean b = Imageutil.saveImage(image, file);
+        return "上传成功";
+    }
 
 
     @PostMapping("/addfiles")
-    @ResponseBody
     public String addfiles(MultipartFile myfile) throws IOException {
 
         String imageSuffix = Imageutil.getImageSuffix(myfile);

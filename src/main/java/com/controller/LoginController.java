@@ -25,7 +25,7 @@ public class LoginController {
     //访问登录页面
     @RequestMapping("/lg")
     public String login(){
-        return "login_v2";
+        return "login";
     }
     //密码校验
     @PostMapping("/selectUser")
@@ -34,13 +34,13 @@ public class LoginController {
         log.info("登录:{}",user);
         if (userService.selectUser(user)){
             if(user.getUser_type()==1){
-                return "index";
+                return "/index";
             }else {
                 model.addAttribute("lguser",user);
                 List<Goods> goodsList=goodsService.getAllsuidOrders();
                 model.addAttribute("goods",goodsList);
-                System.out.println(goodsList.toString());
-                return "user_index";
+//                System.out.println(goodsList.toString());
+                return "/user_index";
             }
         }
         else

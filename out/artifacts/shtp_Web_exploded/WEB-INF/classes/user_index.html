@@ -1,178 +1,292 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>H+ 后台主题UI框架 - 团队管理</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-     <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
-    <link href="/static/css/animate.css" rel="stylesheet">
-    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <title>Home</title>
+    <link href="/static/user/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 
+    <!-- Custom Theme files -->
+    <link href="/static/user/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfont-->
+<!--    <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>-->
+<!--    <link href='http://fonts.useso.com/css?family=Dancing+Script:400,700' rel='stylesheet' type='text/css'>-->
+    <script src="/static/user/js/jquery.easydropdown.js"></script>
+    <script src="/static/user/js/responsiveslides.min.js"></script>
 
+    <link href="/static/slider/bootstrap.min.css" rel="stylesheet">
+
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+    </script>
+    <script src="/static/user/js/easyResponsiveTabs.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
+        });
+    </script>
+    <script type="text/javascript" src="/static/user/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+            });
+        });
+    </script>
 
 </head>
-
-<body class="gray-bg" >
-
-<div class="container-fluid" >
-
-    <!--导航栏-->
-    <nav class="navbar navbar-default navbar-fixed-top my-navbar" role="navigation">
-        <div class="container-fluid">
-            <div class="nav navbar-nav">
-                <a class="navbar-brand" href="#">校园二手交易平台</a>
+<body>
+<!-- header-section-starts -->
+<div class="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="header-left">
+                <p>校园二手交易平台</p>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">SVN</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        商品分类 <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">书籍</a></li>
-                        <li><a href="#">日用品</a></li>
-                        <li><a href="#">工具类</a></li>
-                        <li class="divider">电子产品</li>
-                        <li><a href="#">分离的链接</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">另一个分离的链接</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="align-content-center">
+                <!-- Button trigger modal -->
 
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+
+                            <div class="modal-body">
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="productName">商品名称</label>
+                                            <input type="text" class="form-control" id="productName" placeholder="请输入商品名称">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productPrice">商品价格</label>
+                                            <input type="number" class="form-control" id="productPrice" placeholder="请输入商品价格">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productDescription">商品描述</label>
+                                            <textarea class="form-control" id="productDescription" rows="3" placeholder="请输入商品描述"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productImage">商品图片</label>
+                                            <input type="file" class="form-control-file" id="productImage">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary center-block">提交</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-default">提交按钮</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li th:unless="${lguser}" ><a href="/login/register"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-                <li th:if="${lguser}"><span class="glyphicon "></span>yi登录</li>
-                <li th:unless="${lguser}"><a href="/login/lg"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
 
-            </ul>
+            </div>
+            </div>
+            <div class="login-section">
+                <ul>
+                    <li th:unless="${lguser}"><a href="login.html">Login</a>  </li> |
+                    <li th:unless="${lguser}"><a href="register.html">Register</a> </li>
+                </ul>
+            </div>
+            <!-- start search-->
+            <div class="search-box">
+                <div id="sb-search" class="sb-search">
+                    <form>
+                        <input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+                        <input class="sb-search-submit" type="submit" value="">
+                        <span class="sb-icon-search"> </span>
+                    </form>
+                </div>
+            </div>
+            <!-- search-scripts -->
+            <script src="/static/user/js/classie.js"></script>
+            <script src="/static/user/js/uisearch.js"></script>
+            <script>
+                new UISearch( document.getElementById( 'sb-search' ) );
+            </script>
+            <!-- //search-scripts -->
+            <div class="clearfix"></div>
         </div>
-    </nav>
-</div>
-
-
-
-
-<div class="wrapper wrapper-content animated fadeInRight">
-   <div class="container">
-       <div th:each="good :${goods}">
-           <div class="col-sm-3">
-               <div class="ibox">
-                   <div class="ibox-title">
-                        <span class=" pull-right">
-							<button class="btn btn-danger btn-circle btn-outline" type="button"><i class="fa fa-heart"></i>
-                            </button></span>
-                       <h5><span th:text="${good.goods_name}"></span></h5>
-                   </div>
-                   <div class="ibox-content">
-
-                       <h4><span th:text="${good.goods_info}"></span></h4>
-                       <a href="#"><img alt="member" class="img-thumbnail" src="../../img/a6.jpg">
-                           <div>
-                               <span>价格：<span th:text="${good.goods_price}"></span></span>
-                               <span class="pull-right"><button>购买</button></span>
-                           </div>
-                       </a>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <!-- 模态框触发按钮 -->
-       <button type="button" class="btn btn-primary navbar-nav" data-toggle="modal" data-target="#addProductModal">
-           上架新商品
-       </button>
-
-   </div>
-
-
-</div>
-
-
-
-<!-- 模态框 -->
-<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addProductModalLabel">添加商品</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="gb" aria-hidden="true">&times;</span>
+    </div>
+    <div class="bottom-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>校园二手交易平台</h1></a>
+            </div>
+            <div class="header_bottom_right">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">
+                    上架商品
                 </button>
             </div>
-            <div class="modal-body">
-                <!-- 表单 利用Ajax上传-->
-                <form id="addProductForm" th:action="@{/goods/addGoods" method="post"  >
-                    <div class="form-group">
-                        <label for="productName">商品名称</label>
-                        <input type="text" class="form-control" id="productName" name="goods_name" title="最大长度为10个字符" maxlength="10" placeholder="商品名" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="productName">商品简介</label>
-                        <input type="text" class="form-control" id="productInfo" name="goods_info" required>
-                    </div>
-                    <input name="owner_username" id="owner_username" type="text" th:value="${user.username}" hidden>
-                    <div class="form-group">
-                        <label for="productPrice">商品价格</label>
-                        <input type="number" class="form-control" id="productPrice" name="goods_price" min="0" step="0.01" required>
-                    </div>
-                </form>
+            <div class="header_bottom_right">
+                <!-- start h_menu4 -->
+                <div class="h_menu4">
+                    <a class="toggleMenu" href="">Menu</a>
+                    <ul class="nav">
+                        <li class="active"><a href="index.html">主页</a></li>
+                        <li><a href="products.html" class="root">分类</a>
+                            <ul>
+                                <li><a href="products.html">电子类</a></li>
+                                <li><a href="products.html">书本类</a></li>
+                                <li><a href="products.html">衣服</a></li>
+                                <li><a href="products.html">自行车</a></li>
+                                <li><a href="products.html">文本</a></li>
+                                <li><a href="products.html">没啥事</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="bikes.html">自行车</a>
+                            <ul>
+                                <li><a href="bikes.html">山地车</a></li>
+                                <li><a href="bikes.html">撒大苏打</a></li>
+                                <li><a href="bikes.html">Footwear</a></li>
+                                <li><a href="bikes.html">spets</a></li>
+                                <li><a href="bikes.html">arms</a></li>
+                                <li><a href="bikes.html">sales</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                    <script type="text/javascript" src="/static/user/js/nav.js"></script>
+                </div>
+                <!-- end h_menu4 -->
+                <div class="clearfix"></div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="submitForm()"  id="addProductBtn">添加</button>
-            </div>
+
+    </div>
+</div>
+<!-- header-section-ends -->
+<!-- content-section-starts -->
+<div class="content">
+    <div class="container">
+        <div class="brand">
+
+<!--            加一个轮播图-->
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+            <p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+
+
+<!--            <div class="clearfix"></div>-->
+        </div>
+
+        <div class="sap_tabs">
+                <ul class="col-md-4" th:each="good :${goods}" >
+                    <li>
+                        <div class="view view-first">
+                            <img src="/static/user/images/pic1.jpg" class="img-responsive" alt=""/>
+                            <div class="info1"><h4>hot</h4></div>
+                            <div class="mask">
+
+                            </div>
+                            <div class="tab_desc">
+                                <div class="tab_desc_1">
+                                    <h5 th:text="${good.goods_name}"></h5>
+                                </div>
+                                <div class="tab_desc_2">
+                                    <p th:text="'$'+${good.goods_info}"></p>
+                                    <button class="pull-right">添加购物车</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <img src="/static/user/images/rating.png" alt="" />
+                    </li>
+                    <div class="clearfix"></div>
+                </ul>
         </div>
     </div>
 </div>
+<!-- content-section-ends -->
+<!-- footer-section-starts -->
+<div class="footer">
+    <div class="container">
+        <div class="col-md-3 shop">
+            <h3>shop</h3>
+            <ul>
+                <li><a href="#">new arrivals</a></li>
+                <li><a href="#">men</a></li>
+                <li><a href="#">accessories</a></li>
+                <li><a href="#">kids</a></li>
+                <li><a href="#">brands</a></li>
+                <li><a href="#">trends</a></li>
+                <li><a href="#">sale</a></li>
+                <li><a href="#">style videos</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 shop">
+            <h3>help</h3>
+            <ul>
+                <li><a href="#">frequently asked questions</a></li>
+                <li><a href="#">women</a></li>
+                <li><a href="#">style videos</a></li>
+                <li><a href="#">sale</a></li>
+                <li><a href="#">trends</a></li>
+                <li><a href="#">style videos</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 shop">
+            <h3>account</h3>
+            <ul>
+                <li><a href="#">my sports</a></li>
+                <li><a href="#">my orders</a></li>
+                <li><a href="#">my shopping bag</a></li>
+                <li><a href="#">my wishlist</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 shop">
+            <h3>popular</h3>
+            <ul>
+                <li><a href="#">accessories</a></li>
+                <li><a href="#">brands</a></li>
+                <li><a href="#">frequently asked questions</a></li>
+                <li><a href="#">style videos</a></li>
+                <li><a href="#">women</a></li>
+                <li><a href="#">my orders</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="copy-rights">
+            <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+        </div>
+    </div>
+</div>
+<!-- footer-section-ends -->
 
-<script>
-    function submitForm() {
-        var form = $('#addProductForm');
 
-        $.ajax({
-            type: form.attr('method'),
-            url: form.attr('action'),
-            data: form.serialize(),
-            success: function (message) {
-                alert(message);
-                //清空模态框中的表单输入的内容
-                $('#addProductForm').find("input, textarea, select").val("");
-                //提交表单后隐藏表单
-                $('#addProductModal').modal('hide');
-            },
-            error: function () {
-                alert('提交失败！');
+<!-- Modal -->
 
-            }
-        });
-    }
-</script>
-<!-- 全局js -->
-<script src="/static/js/jquery.min.js?v=2.1.4"></script>
-<script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-<script src="/static/js/content.js"></script>
-
+<!--模态框js-->
+<!-- 引入jQuery和Bootstrap JS -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 
 </body>
-
 </html>
